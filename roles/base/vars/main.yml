@@ -1,0 +1,15 @@
+dest: "{{ ansible_env.PWD }}/playbooks"
+directories:
+  variables:
+    - group_vars
+    - host_vars
+  plugins:
+    - library
+    - filter_plugins
+inventory_files:
+  - hosts-development
+  - hosts-staging
+  - hosts-production
+infrastructure_groups:
+  - webservers
+  - dbservers

@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    dest: "{{ ansible_env.PWD }}/playbooks"
+    role: ~
+  tasks:
+    - name: create directories for roles
+      file: >
+        path={{ dest }}/roles/{{ role }}/{{ item }}
+        state=directory
+      when: role != None
+      with_items:
+        - tasks
+        - handlers
+        - files
+        - templates
+        - vars
+        - defaults
+        - meta
+    - name: create main.yml
+      file: >
+        path={{ dest }}/roles/{{ role }}/{{ item }}/main.yml
+        state=touch
+      when: item[0] != ''
+      with_items:
+        - tasks
+        - handlers
+        - vars
+        - defaults
+        - meta

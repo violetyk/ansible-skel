@@ -1,0 +1,28 @@
+- name: create root of playbooks
+  file: >
+    path={{ dest }}
+    state=directory
+
+- name: create skelton of inventory
+  copy: >
+    src=inventory
+    dest={{ dest }}/{{ item }}
+  with_items: "{{ inventory_files }}"
+
+- name: create playbooks of groups
+  template: >
+    src=group.yml.j2
+    dest={{ dest }}/{{ item }}.yml
+  with_items: "{{ infrastructure_groups }}"
+
+- name: create directories for variables
+  file: >
+    path={{ dest }}/{{ item }}
+    state=directory
+  with_items: "{{ directories.variables }}"
+
+- name: create directories for plugins
+  file: >
+    path={{ dest }}/{{ item }}
+    state=directory
+  with_items: "{{ directories.plugins }}"

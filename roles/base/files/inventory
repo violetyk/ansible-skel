@@ -1,0 +1,11 @@
+localhost ansible_connection=local
+
+# 192.168.33.10
+
+# [webservers]
+# alpha.example.org
+# beta.example.org
+# 192.168.1.100
+# 192.168.1.110
+
+# www[001:006].example.comwebservers
