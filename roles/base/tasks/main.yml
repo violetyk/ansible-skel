@@ -9,6 +9,11 @@
     dest={{ dest }}/{{ item }}
   with_items: "{{ inventory_files }}"
 
+- name: create master playbook
+  copy: >
+    src=site.yml
+    dest={{ dest }}/
+
 - name: create playbooks of groups
   template: >
     src=group.yml.j2
