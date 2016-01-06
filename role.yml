@@ -18,14 +18,17 @@
         - vars
         - defaults
         - meta
-    - name: create main.yml
+
+    - name: create files
       file: >
-        path={{ dest }}/roles/{{ role }}/{{ item }}/main.yml
+        path={{ dest }}/roles/{{ role }}/{{ item.directory }}/{{ item.file }}
         state=touch
-      when: item[0] != ''
+      when: role != None
       with_items:
-        - tasks
-        - handlers
-        - vars
-        - defaults
-        - meta
+        - { directory: tasks, file: main.yml }
+        - { directory: handlers, file: main.yml }
+        - { directory: files, file: empty }
+        - { directory: templates, file: empty }
+        - { directory: vars, file: main.yml }
+        - { directory: defaults, file: main.yml }
+        - { directory: meta, file: main.yml }
